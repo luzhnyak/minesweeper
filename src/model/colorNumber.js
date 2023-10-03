@@ -16,3 +16,14 @@ export const colorNumber = number => {
       return 'black';
   }
 };
+
+export const colorBackground = status => {
+  switch (status) {
+    case 'open':
+      return 'white';
+    case 'blast':
+      return 'red';
+    default:
+      return 'lightgrey';
+  }
+};

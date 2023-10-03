@@ -1,4 +1,4 @@
-class Minesweeper {
+export class Minesweeper {
   constructor(fieldWidth, fieldHeight, maxMines) {
     this.fieldWidth = fieldWidth;
     this.fieldHeight = fieldHeight;
@@ -58,6 +58,3 @@ class Minesweeper {
     }
   }
 }
-
-export const mineSweeper = new Minesweeper(10, 10, 10);
-mineSweeper.generateField();

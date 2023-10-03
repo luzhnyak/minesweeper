@@ -1,27 +1,23 @@
 import { Cell } from 'components/Cell/Cell';
-import { Row } from './Filed.styled';
+import { Row, FieldWrapper } from './Filed.styled';
+import { useApp } from 'context/appContext';
 
-export const Field = ({
-  mineSweeper: { field },
-  setMineCount,
-  isNewGame,
-  setIsNewGame,
-}) => {
-  return field.map((row, i) => {
-    return (
-      <Row key={i}>
-        {row.map((cell, j) => {
-          return (
-            <Cell
-              value={cell}
-              key={`${i}x${j}`}
-              setMineCount={setMineCount}
-              isNewGame={isNewGame}
-              setIsNewGame={setIsNewGame}
-            />
-          );
-        })}
-      </Row>
-    );
-  });
+export const Field = () => {
+  const {
+    mineSweeper: { field },
+  } = useApp();
+
+  return (
+    <FieldWrapper>
+      {field.map((row, i) => {
+        return (
+          <Row key={i}>
+            {row.map((cell, j) => {
+              return <Cell value={cell} key={`${i}x${j}`} />;
+            })}
+          </Row>
+        );
+      })}
+    </FieldWrapper>
+  );
 };

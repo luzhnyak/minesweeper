@@ -1,13 +1,15 @@
-import { FaSmile } from 'react-icons/fa';
-import { HeaderWrapper } from './Header.styled';
-import { Button } from './Button/Button.styled';
+import { FaSmile, FaDizzy } from 'react-icons/fa';
+import { HeaderWrapper, Button } from './Header.styled';
+import { useApp } from 'context/appContext';
 
-export const Header = ({ mineCount, newGame, timeGeme }) => {
+export const Header = () => {
+  const { mineCount, newGame, timeGeme, isWinner } = useApp();
   return (
     <HeaderWrapper>
       <span>{mineCount}</span>
-      <Button onClick={newGame}>
-        <FaSmile />
+      <Button onClick={newGame} backgrouncolor="lightgreen">
+        {!isWinner() && <FaDizzy />}
+        {isWinner() && <FaSmile />}
       </Button>
       <span>{timeGeme}</span>
     </HeaderWrapper>
