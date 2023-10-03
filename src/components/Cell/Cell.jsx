@@ -33,10 +33,12 @@ export const Cell = ({ value }) => {
 
   const handleClick = event => {
     event.preventDefault();
+
+    if (statusCell === 'open' || statusCell === 'blast') return;
+
     console.log(isWinner());
     console.log(mineCount, openCount);
     setIsNewGame(false);
-    if (statusCell === 'open') return;
 
     if (event.button === 2) {
       if (statusCell === 'flag') {

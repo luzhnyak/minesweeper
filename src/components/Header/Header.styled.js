@@ -1,11 +1,26 @@
 import styled from 'styled-components';
 
 export const HeaderWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 8px;
   border: 1px solid gray;
+  padding: 8px;
+  h1 {
+    padding: 0;
+    margin: 0 0 4px 0;
+    font-size: 20px;
+    text-align: center;
+  }
+  div {
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+    align-items: center;
+    span {
+      font-size: 36px;
+      font-weight: 900;
+      color: darkred;
+      cursor: pointer;
+    }
+  }
 `;
 
 export const Button = styled.button`
@@ -15,7 +30,11 @@ export const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid gray;
+  border: 2px solid gray;
+  border-top-color: white;
+  border-left-color: white;
+  border-right-color: green;
+  border-bottom-color: green;
   svg {
     width: 20px;
     height: 20px;
