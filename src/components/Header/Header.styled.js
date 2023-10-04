@@ -12,13 +12,17 @@ export const HeaderWrapper = styled.div`
   div {
     display: flex;
     justify-content: center;
-    gap: 90px;
+    gap: 50px;
     align-items: center;
     span {
+      width: 100px;
       font-size: 36px;
       font-weight: 900;
       color: darkred;
       cursor: pointer;
+      &:last-child {
+        text-align: right;
+      }
     }
   }
 `;

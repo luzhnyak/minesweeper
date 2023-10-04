@@ -7,13 +7,25 @@ export const Field = () => {
     mineSweeper: { field },
   } = useApp();
 
+  const setOpen = (i, j) => {
+    return false;
+  };
+
   return (
     <FieldWrapper>
       {field.map((row, i) => {
         return (
           <Row key={i}>
             {row.map((cell, j) => {
-              return <Cell value={cell} key={`${i}x${j}`} />;
+              return (
+                <Cell
+                  cell={cell}
+                  i={i}
+                  j={j}
+                  setOpen={setOpen(i, j)}
+                  key={`${i}x${j}`}
+                />
+              );
             })}
           </Row>
         );

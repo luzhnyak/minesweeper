@@ -3,22 +3,23 @@ import { HeaderWrapper, Button } from './Header.styled';
 import { useApp } from 'context/appContext';
 
 export const Header = () => {
-  const { mineCount, newGame, timeGeme, isWinner, isGameOver } = useApp();
+  const { newGame, isWinner, isGameOver, mineCount, openCount } = useApp();
+
   return (
     <HeaderWrapper>
       <h1>
         {isWinner() && 'You win!'}
         {!isWinner() && isGameOver && 'You lost!'}
-        {!isGameOver && 'MineSweeper'}
+        {!isGameOver && !isWinner() && 'MineSweeper'}
       </h1>
       <div>
         <span>{(10 - mineCount).toString().padStart(3, '0')}</span>
         <Button onClick={newGame} backgrouncolor="lightgreen">
           {!isWinner() && isGameOver && <FaDizzy />}
-          {!isGameOver && <FaSmile />}
+          {!isGameOver && !isWinner() && <FaSmile />}
           {isWinner() && <FaGrinAlt />}
         </Button>
-        <span>{timeGeme.toString().padStart(3, '0')}</span>
+        <span>{openCount.toString().padStart(3, '0')}</span>
       </div>
     </HeaderWrapper>
   );

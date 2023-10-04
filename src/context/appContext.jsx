@@ -14,14 +14,22 @@ export const AppProvider = ({ children }) => {
   const [timeGeme, setTimeGeme] = useState(0);
   const [isNewGame, setIsNewGame] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
+  // const [mineSweeper, setMineSweeper] = useState(new Minesweeper(10, 10, 10));
+
   //   const [isWinner, setIsWinner] = useState(false);
 
   //   setInterval(() => {
   //     setTimeGeme(prevTimeGeme => prevTimeGeme + 1);
   //   }, 1000);
+  // useEffect(() => {
+  //   setMineCount(mineSweeper.cellCount('flag'));
+  //   setOpenCount(mineSweeper.cellCount('open'));
+  //   console.log(mineSweeper.cellCount('flag'));
+  // }, [mineSweeper]);
 
   const newGame = () => {
     setIsNewGame(true);
+    mineSweeper.closeAll();
     mineSweeper.generateField();
     setTimeGeme(0);
     setMineCount(0);
@@ -41,16 +49,6 @@ export const AppProvider = ({ children }) => {
       return false;
     }
   };
-
-  //   const logIn = () => {
-  //     setIsLoggedIn(true);
-  //     setUsername('Mango');
-  //   };
-
-  //   const logOut = () => {
-  //     setIsLoggedIn(false);
-  //     setUsername(null);
-  //   };
 
   return (
     <AppContext.Provider
