@@ -44,6 +44,7 @@ export const AppProvider = ({ children }) => {
       maxMines === mineCount &&
       fieldHeight * fieldWidth === mineCount + openCount
     ) {
+      mineSweeper.openAll();
       return true;
     } else {
       return false;

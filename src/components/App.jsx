@@ -1,6 +1,7 @@
 import { Container } from './App.styled';
 import { Header } from './Header/Header';
 import { Field } from './Field/Field';
+import Footer from './Footer/Footer';
 
 export const App = () => {
   // const { setTimeGeme } = useApp();
@@ -19,6 +20,7 @@ export const App = () => {
     <Container>
       <Header />
       <Field />
+      <Footer />
     </Container>
   );
 };
