@@ -2,6 +2,7 @@ import { colorNumber, colorBackground } from 'model/colorNumber';
 import { CellButton } from './Cell.styled';
 import { FaBomb, FaFlag } from 'react-icons/fa';
 import { useApp } from 'context/appContext';
+// import { useRef } from 'react';
 // import { useEffect, useState } from 'react';
 
 export const Cell = ({ cell: { value, status }, i, j, setOpen }) => {
@@ -15,28 +16,6 @@ export const Cell = ({ cell: { value, status }, i, j, setOpen }) => {
     setOpenCount,
   } = useApp();
 
-  // useEffect(() => {
-  //   console.log('status', status);
-  //   setStatusCell(status);
-  // }, [status]);
-
-  // useEffect(() => {
-  //   if (isNewGame) {
-  //     // setStatusCell('close');
-  //     mineSweeper.changeStatus(i, j, 'close');
-  //     // status = 'close';
-  //   }
-  // }, [isNewGame, status]);
-
-  // useEffect(() => {
-  //   if (isGameOver) {
-  //     if (status === 'blast') return;
-  //     // setStatusCell('open');
-  //     // status = 'open';
-  //     mineSweeper.changeStatus(i, j, 'open');
-  //   }
-  // }, [isGameOver, mineSweeper]);
-
   const handleClick = event => {
     event.preventDefault();
 
@@ -44,44 +23,54 @@ export const Cell = ({ cell: { value, status }, i, j, setOpen }) => {
 
     setIsNewGame(false);
 
-    if (event.button === 2) {
-      if (status === 'flag') {
-        mineSweeper.changeStatus(i, j, 'close');
-        // setStatusCell('close');
-        setMineCount(prev => prev - 1);
-      } else if (status === 'close') {
-        mineSweeper.changeStatus(i, j, 'flag');
-        setMineCount(prev => prev + 1);
-        // setStatusCell('flag');
-      }
-      return;
-    }
-
-    if (status === 'flag') return;
-
     if (event.button === 0) {
       mineSweeper.changeStatus(i, j, 'open');
       setOpenCount(prev => prev + 1);
-      // setStatusCell('open');
-    }
 
-    if (value === 0) {
-      mineSweeper.openAuto(i, j);
+      if (value === 0) {
+        mineSweeper.openAuto(i, j);
 
-      setOpenCount(mineSweeper.cellCount('open'));
+        setOpenCount(mineSweeper.cellCount('open'));
+      }
+      if (value === -1) {
+        mineSweeper.changeStatus(i, j, 'blast');
+        setOpenCount(prev => prev + 1);
 
-      // console.log(mineSweeper.cellCount('open'));
-    }
-    if (value === -1) {
-      mineSweeper.changeStatus(i, j, 'blast');
-      setOpenCount(prev => prev + 1);
-      // setStatusCell('blast');
-      mineSweeper.openAll();
-      setIsGameOver(true);
+        mineSweeper.openAll();
+        setIsGameOver(true);
+      }
     }
   };
 
-  const handleContextMenu = event => event.preventDefault();
+  const handleContextMenu = event => {
+    event.preventDefault();
+
+    if (status === 'flag') {
+      mineSweeper.changeStatus(i, j, 'close');
+      // setStatusCell('close');
+      setMineCount(prev => prev - 1);
+    } else if (status === 'close') {
+      mineSweeper.changeStatus(i, j, 'flag');
+      setMineCount(prev => prev + 1);
+      // setStatusCell('flag');
+    }
+  };
+
+  // const touchStartTime = useRef(0);
+  // const touchEndTime = useRef(0);
+
+  // const handleTouchStart = () => {
+  //   touchStartTime.current = new Date().getTime();
+  // };
+
+  // const handleTouchEnd = () => {
+  //   touchEndTime.current = new Date().getTime();
+  //   const touchDuration = touchEndTime.current - touchStartTime.current;
+
+  //   if (touchDuration >= 500) {
+  //     alert('Long tap');
+  //   }
+  // };
 
   return (
     <CellButton
@@ -91,6 +80,8 @@ export const Cell = ({ cell: { value, status }, i, j, setOpen }) => {
       status={status}
       onMouseDown={handleClick}
       onContextMenu={handleContextMenu}
+      // onTouchStart={handleTouchStart}
+      // onTouchEnd={handleTouchEnd}
     >
       {value === -1 && (status === 'open' || status === 'blast') && <FaBomb />}
       {value > 0 && status === 'open' && value}
